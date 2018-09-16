@@ -1,0 +1,109 @@
+@charset "utf-8";
+
+/* reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, input,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	list-style: none;
+	vertical-align: baseline;
+	color:#000;
+	font-size:16px
+}
+
+h1, h2, h3, h4, h5 {font-weight:normal}
+p {line-height:1.6em}
+a {text-decoration:none}
+em,address,i {font-style:normal}
+
+img,fieldset {border:0}
+img {vertical-align:middle}
+button {border:none}
+label {cursor:pointer}
+
+html,body {height:100%}
+
+/* login */
+.wrapper.login {position:relative;background:url('../images/m_login_bg.jpg') no-repeat center right;background-size:cover}
+.wrapper.login .container {position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);overflow:auto}
+.wrapper.login .content {width:90%;margin:0 5%;padding:30px 0;border-radius:5%;}
+.wrapper.login .content h1 {margin-top:20px;margin-bottom:30px;text-align:center}
+.wrapper.login .content li {position:relative;margin-top:5px}
+.wrapper.login .content li:first-child {margin:0}
+.wrapper.login .content label {display:none}
+.wrapper.login .content input[type="text"],
+.wrapper.login .content input[type="password"]{display:inline-block;width:100%;height:40px;padding-left:30px;vertical-align:middle;color:#fff;border:1px solid #ccc;border-width:0 0 1px 0;box-sizing:border-box}
+.wrapper.login .content input[type="text"] {background:url(../images/m_login_user.png) no-repeat 5px center}
+.wrapper.login .content input[type="password"] {background:url(../images/m_login_password.png) no-repeat 5px center}
+.wrapper.login .content input::placeholder {color:#ccc}
+.wrapper.login .content input:focus {border-color:#fff}
+.wrapper.login .content .save {float:right;margin:10px 0}
+.wrapper.login .content .save label {display:inline-block;font-size:14px;color:#ccc}
+.wrapper.login .content .save input[type="checkbox"] {opacity:0.5}
+.wrapper.login .content .error {clear:both;height:64px;text-align:center}
+.wrapper.login .content .error p {padding-top:10px;padding-bottom:20px;font-size:14px;color:#f09fa4}
+.wrapper.login .content .btn {display:inline-block;width:100%;height:40px;line-height:40px;text-align:center;font-size:18px;font-weight:bold;color:#fff;border-radius:4px;background:#76c043;box-sizing:border-box}
+.wrapper.login .content .find {overflow:hidden;margin-top:10px;text-align:center}
+.wrapper.login .content .find a {display:inline-block;font-size:14px;color:#ddd}
+.wrapper.login .content .find a:first-child::after {content:'|';margin:0 5px;color:#ccc}
+
+/* main */
+.wrapper.main {height:100%}
+.wrapper.main .title {height:70px;line-height:70px;text-align:center}
+.wrapper.main .gnb {width:100%;height:50px;border-bottom:1px solid #eee;box-sizing:border-box}
+.wrapper.main .gnb ul {float:left;overflow:hidden;width:100%}
+.wrapper.main .gnb li {float:left;width:33%;height:50px}
+.wrapper.main .gnb li a {display:block;width:100%;height:100%;line-height:50px;text-align:center;font-size:16px;font-family:'Nanum Barun Gothic';font-weight:700;color:#aaa;box-sizing:border-box}
+.wrapper.main .gnb li.on a {color:#76c043;border-bottom:3px solid #76c043}
+.wrapper.main .list {display:none;overflow:auto;height:calc(100% - 120px)}
+.wrapper.main .list#tab1 {display:block}
+.wrapper.main .list .search {width:100%;height:50px;padding:8px;box-sizing:border-box}
+.wrapper.main .list .search input[type="text"] {width:100%;height:34px;padding-left:27px;font-size:14px;border:0;border-radius:5px;background:url(../images/m_icon_search.png) no-repeat 10px center #f5f5f5;box-sizing:border-box}
+.wrapper.main .list .search input::placeholder {color:#ccc}
+.wrapper.main .list li {position:relative;height:40px;padding:10px 15px;border-top:1px solid #eee}
+.wrapper.main .list li .info {float:left}
+.wrapper.main .list li .info strong {display:block;line-height:22px}
+.wrapper.main .list li .info strong span {margin-left:10px;font-weight:normal}
+.wrapper.main .list li .info span {display:inline-block;line-height:18px;font-size:13px;color:#aaa}
+.wrapper.main .list li .bookmark {float:left;width:22px;height:40px;margin-right:15px;text-indent:-999px;background:url(../images/m_icon_bookmark.png) no-repeat 0 0}
+.wrapper.main .list li .bookmark.on {background-position:0 -40px}
+.wrapper.main .list li .phone {float:right;margin:7px 0;padding:5px 10px;font-size:12px;border:1px solid #ccc;border-radius:20px;color:#aaa}
+
+/* video */
+.wrapper {height:100%}
+.wrapper .shadow {position:absolute;top:0;left:0;width:100%;height:100%;background:-webkit-linear-gradient(top, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.1) 150%);z-index:10}
+.wrapper .video {overflow:hidden}
+.wrapper .video img {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1}
+.wrapper .video.counsellor {width:100%;height:100%;background:#f4f4f4}
+.wrapper .video.customer {position:absolute;top:15px;left:15px;width:150px;height:200px;border-radius:5px;background:#c4c4c4;box-sizing:border-box;z-index:100}
+.wrapper .icon {overflow:hidden;position:absolute;top:10px;right:10px;z-index:100}
+.wrapper .icon a {overflow:hidden;display:inline-block;width:30px;height:30px;text-indent:-999px;background-repeat:no-repeat;background-position:0 0}
+.wrapper .icon a + a {margin-left:10px}
+.wrapper .icon a.transform {background-image:url(../images/m_icon_transform.png)}
+.wrapper .icon a.borad {background-image:url(../images/m_icon_borad.png)}
+.wrapper .icon a.camera {background-image:url(../images/m_icon_camera.png)}
+.wrapper .icon a.menu {background-image:url(../images/m_icon_menu.png)}
+.wrapper .button {overflow:hidden;position:absolute;bottom:30px;width:100%;text-align:center;z-index:100}
+.wrapper .button a {overflow:hidden;display:inline-block;width:70px;height:70px;margin:0 15px;text-indent:-999px;border-radius:100%;background-repeat:no-repeat;background-position:0 0;background-color:#fff}
+.wrapper .button a.camera {background-image:url(../images/m_btn_camera.png)}
+.wrapper .button a.audio {background-image:url(../images/m_btn_audio.png)}
+.wrapper .button a.camera.off {background-position:0 bottom;background-color:rgba(0,0,0,0.3)}
+.wrapper .button a.audio.off {background-position:0 bottom;background-color:rgba(0,0,0,0.3)}
+.wrapper .button a.phone {background-image:url(../images/m_btn_phone.png)}
+.wrapper .button a.phone.start {background-color:#76c043}
+.wrapper .button a.phone.end {background-position:0 bottom;background-color:red}
+.wrapper .comment {position:absolute;bottom:130px;width:100%;text-align:center;z-index:100}
+.wrapper .comment p {font-size:15px;color:rgba(150,150,150,0.5)}
+.wrapper .comment p span {display:block;font-size:18px;color:inherit}
