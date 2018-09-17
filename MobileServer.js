@@ -3,13 +3,19 @@ const app = express()
 const fs = require('fs')
 const bodyParser = require('body-parser')
 const path = require('path')
+const https = require('https')
 // const compression = require('compression');
 // const helmet = require('helmet')
 // app.use(helmet());
 const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 
-app.set('views', path.join(__dirname, '/public/views'))
+const options = {
+  key : fs.readFileSync('./SSL/knowledgetalk.key'),
+  cert : fs.readFileSync('./SSL/knowledgetalk.pem')
+};
+
+app.set('views', path.join(__dirname, '/public/views/pages'))
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
@@ -29,7 +35,7 @@ app.use(express.static('public'))
 //   });
 // });
 
-const indexRouter = require('./routes/index')
+const indexRouter = require('./routes')
 // const topicRouter = require('./routes/topic')
 // const authRouter = require('./routes/auth')
 
@@ -37,15 +43,18 @@ app.use('/', indexRouter)
 // app.use('/topic', topicRouter)
 // app.use('/auth', authRouter)
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send('Sorry cant find that!');
 });
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 });
 
-app.listen(8888, function() {
-  console.log('Example app listening on port 3000!')
-});
+const port = 8888
+const server = https.createServer(options, app).listen(port, () => {
+  console.log('::: HTTPS ::: App Server Started - PORT : ' + port)
+})
+
+var io = require('socket.io')(server);
