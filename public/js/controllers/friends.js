@@ -34,7 +34,7 @@ const FriendsController = (() => {
             let dom = window.Domify.createDomFromStr(str)
             friendField.append(dom)
             window.Domify.addEvent({
-                el: dom.getElementsByTagName('a')[0],
+                el: dom.querySelector('.phone'),
                 type: 'call',
                 eventName: 'ringdingdong',
             });
@@ -56,7 +56,7 @@ const FriendsController = (() => {
             let dom = window.Domify.createDomFromStr(str)
             companyField.append(dom)
             window.Domify.addEvent({
-                el: dom.getElementsByTagName('a')[0],
+                el: dom.querySelector('.phone'),
                 type: 'call',
                 eventName: 'ringdingdong',
             })

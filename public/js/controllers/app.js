@@ -17,13 +17,16 @@ $(document).ready(()=> {
     // Socket
     window.Socket.on('gigagenie', SocketController.eventHandler)
 
-    setTimeout(function() {
-            alert('이벤트 붙인다')
             
-        window.addEventListener('ringdingdong', function (evt) {
-            alert('dzdz')
-        })
-    }, 3000)
+    window.addEventListener('ringdingdong', function (evt) {
+        alert('dzdz')
+    })
+
+    // $loginBtn.click(function() {
+    //     let event = new CustomEvent('ringdingdong')
+    //     window.dispatchEvent(event)
+    // })
+
 
     // Login page
     $loginBtn.click(LoginController.loginButtonClick)

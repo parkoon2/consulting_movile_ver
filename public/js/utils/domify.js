@@ -35,12 +35,15 @@ const Domify = (() => {
         let event;
         if (type === 'call') {
             el.addEventListener('click', function() {
-                event = new CustomEvent(eventName, {
-                    detail: {
-                        spot: el,
-                    }
-                })
+                // event = new CustomEvent(eventName, {
+                //     detail: {
+                //         spot: el,
+                //     }
+                // })
+
+                let event = new CustomEvent('ringdingdong')
                 window.dispatchEvent(event)
+                // window.dispatchEvent(event)
             })
             return
         }
