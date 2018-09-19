@@ -5,6 +5,8 @@ const LoginController = (() => {
     let id, password
 
     _prototype.loginButtonClick = (evt) => {
+        id = 'gtest1'
+        password = 'test'
         if (!id) {
             window.Notice.alert('아이디를 입력해주세요')
             return
@@ -66,9 +68,8 @@ const LoginController = (() => {
         // 로그인 성공
         window.userName = userName
         window.Logger.success('[login.js loginProcess] 로그인 성공', data.message)
-        _prototype.hide()
-        MenuController.show()
-        
+
+        FriendsController.requestFriends()        
     }
 
     function reset() {

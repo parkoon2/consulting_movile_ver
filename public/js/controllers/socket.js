@@ -28,7 +28,35 @@ const SocketController = (() => {
 
                 case 'SDP':
                 ConsultingController.sdpProcess(msg)
-                break;
+                break
+
+                case 'Draw':
+                WhiteboardController.doDrawing(msg)
+                break
+
+                case 'FileShareSvr':
+                WhiteboardController.drawImagefile(msg)
+                break
+
+                case 'ScreenShare':
+                ConsultingController.startP2PScreenshare(msg)
+                break
+
+                case 'FriendList':
+                    FriendsController.handleFriendList(msg, () => {
+                        FriendsController.createFriendDOM()
+                        FriendsController.requestCompanies()
+                    })
+                break
+
+                case 'SingleAddressInfo':
+                FriendsController.handleCompanyList(msg, () => {
+                    FriendsController.createCompanyDOM(() => {
+                        LoginController.hide()
+                        MainController.show()
+                    })
+                })
+                break
             }
 
         } catch (err) {

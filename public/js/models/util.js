@@ -3,5 +3,6 @@
     exports.Logger = Logger.getInstance()
     exports.Notice = Notice.getInstance()
     exports.SHA256 = SHA256.getInstance()
+    exports.Domify = Domify.getInstance()
     exports.DateOfMessage = DateOfMessage.getInstance()
 })(this)

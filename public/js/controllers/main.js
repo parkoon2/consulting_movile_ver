@@ -1,7 +1,7 @@
-const MenuController = (() => {
-    function MenuController() { }
+const MainController = (() => {
+    function MainController() { }
 
-    let _prototype = MenuController.prototype;
+    let _prototype = MainController.prototype;
 
     _prototype.tabHandler = (evt) => {
         evt.preventDefault()
@@ -26,5 +26,9 @@ const MenuController = (() => {
         $main.css('display', 'none')
     }
 
-    return new MenuController()
+    return new MainController()
 })()
+
+
+
+

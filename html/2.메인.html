@@ -15,7 +15,6 @@
 				  $(this).parent().addClass("on");
 				  $(this).parent().siblings().removeClass("on");
 				  var tab = $(this).attr("href");
-				  console.log('tab', tab)
 				  $(".main .list").not(tab).css("display", "none");
 				  $(tab).show();
 			 });
