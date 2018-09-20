@@ -3,7 +3,6 @@ const Domify = (() => {
     function Domify() {
         self = this
     }
-
     
     Domify.prototype.hasClass = (el, className) => {
         if (el.classList)
@@ -15,13 +14,13 @@ const Domify = (() => {
     Domify.prototype.addClass = (el, className) => {
         if (el.classList)
             el.classList.add(className)
-        else if (!hasClass(el, className))
+        else if (!self.hasClass(el, className))
             el.className += " " + className
     }
     Domify.prototype.removeClass = (el, className) => {
         if (el.classList)
             el.classList.remove(className)
-        else if (hasClass(el, className)) {
+        else if (self.hasClass(el, className)) {
             var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
             el.className=el.className.replace(reg, ' ')
         }
@@ -31,19 +30,15 @@ const Domify = (() => {
         let el = opt.el
         let type = opt.type
         let eventName = opt.eventName
-        console.log('eventName',eventName)
         let event;
         if (type === 'call') {
             el.addEventListener('click', function() {
-                // event = new CustomEvent(eventName, {
-                //     detail: {
-                //         spot: el,
-                //     }
-                // })
-
-                let event = new CustomEvent('ringdingdong')
+                event = new CustomEvent(eventName, {
+                    detail: {
+                        spot: el,
+                    }
+                })
                 window.dispatchEvent(event)
-                // window.dispatchEvent(event)
             })
             return
         }

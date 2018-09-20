@@ -11,6 +11,9 @@ const WhiteboardController = (() => {
         this.imageBoardCanvas[0].width = screen.width
         this.imageBoardCanvas[0].height = screen.height
 
+        // Toolbar 초기화
+        this.initWhiteboard()
+
         // Screen 변화에 따른 화이트 보드 크기 변경
         let w = screen.width
         let h = screen.height
@@ -24,16 +27,96 @@ const WhiteboardController = (() => {
         }, 300)
     }
 
-    let _prototype = WhiteboardController.prototype;
-    _prototype.clickHander = () => {
+    let _prototype = WhiteboardController.prototype
+    _prototype.goToWhiteboardPage = () => {
         self.showWhiteboardView()
-        ConsultingController.hideInvitation()
+        ConsultingController.hideVideochat()
+    }
 
+    _prototype.eraseAll = () => {
+        let drawCtx= self.whiteBoardCanvas[0].getContext('2d')
+        drawCtx.clearRect(0, 0, self.whiteBoardCanvas[0].width, self.whiteBoardCanvas[0].height)
+    }
+
+    _prototype.initWhiteboard = () => {
+        window.Logger.success('Initialize whiteboard')
+        let drawCtx= self.whiteBoardCanvas[0].getContext('2d')
+        let imageCtx = self.imageBoardCanvas[0].getContext('2d')
+
+        drawCtx.clearRect(0, 0, self.whiteBoardCanvas[0].width, self.whiteBoardCanvas[0].height)
+        imageCtx.clearRect(0, 0, self.imageBoardCanvas[0].width, self.imageBoardCanvas[0].height)
+        self.initToolbar()
+    }
+
+    _prototype.initToolbar = () => {
+        let ctx = self.whiteBoardCanvas[0].getContext('2d')
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'black';
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        WhiteboardModel.setColor('black')
+        WhiteboardModel.setThickness(5)
+    }
+
+    _prototype.setColor = (msg) => {
+        WhiteboardModel.setColor(msg.color) 
+        self.whiteBoardCanvas[0].getContext('2d').strokeStyle = msg.color
+    }
+
+    _prototype.setEraserSize = (msg) => {
+
+        if (msg.eraserSize === -1) {
+            self.eraseAll()
+            return
+        }
+
+        window.Logger.success('Eraser')
+        let ctx = self.whiteBoardCanvas[0].getContext('2d')
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = '#ffffff'
+        ctx.strokeStyle = '#ffffff'
+        ctx.lineJoin = 'bevel'
+        ctx.lineCap = 'butt'
+        ctx.lineWidth = msg.eraserSize
+
+        WhiteboardModel.setEraserSize(msg.eraserSize)
+        WhiteboardModel.setTooltype('eraser')
+    }
+
+    _prototype.setPen = () => {
+        window.Logger.success('Pen')
+        let ctx = self.whiteBoardCanvas[0].getContext('2d')
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = WhiteboardModel.getColor()
+        ctx.lineWidth = WhiteboardModel.getThickness()
+
+        WhiteboardModel.setTooltype('pen')
+
+    }
+
+
+    _prototype.setThickness = (msg) => {
+        WhiteboardModel.setThickness(msg.lineSize)
+        self.whiteBoardCanvas[0].getContext('2d').lineWidth = msg.lineSize
+
+        if (WhiteboardModel.getTooltype() !== 'pen') {
+            WhiteboardModel.setTooltype('pen')
+            self.setPen()
+        }
     }
 
     _prototype.showWhiteboardView = () => {
         let $whiteboardApp = $('#app-whiteboard')
         $whiteboardApp.css('display', 'block')
+    }
+
+    _prototype.hideWhiteboardView = () => {
+        let $whiteboardApp = $('#app-whiteboard')
+        $whiteboardApp.css('display', 'none')
     }
 
     _prototype.resizeCanvas = (canvas, width, height) => {
@@ -74,6 +157,10 @@ const WhiteboardController = (() => {
      _prototype.mapping = (img, canvas, callback) => {
         canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height)
         callback()
+    }
+
+    _prototype.doErasing = (msg) => {
+        self.doDrawing(msg)
     }
 
     _prototype.doDrawing = (msg) => {

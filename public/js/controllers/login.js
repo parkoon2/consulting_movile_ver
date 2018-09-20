@@ -1,5 +1,18 @@
 const LoginController = (() => {
-    function LoginController() { }
+    function LoginController() {
+        // let $saveIdBtn = $('#save-id-btn')
+        // let $userId = $('#user-id')
+        // let isIdSaved = localStorage.getItem('ID-SAVED')
+        // let id = localStorage.getItem('ID')
+
+        // if (isIdSaved  === 'true') {
+        //     $saveIdBtn.prop('checked', true)
+        //     $userId.val(id)
+        // } else {
+        //     $saveIdBtn.prop('checked', false)
+        //     $userId.val('')
+        // }
+    }
 
     let _prototype = LoginController.prototype;
     let id, password
@@ -27,11 +40,33 @@ const LoginController = (() => {
         })
     }
 
+    _prototype.handleSaveId = (evt) => {
+        let $saveIdBtn = $('#save-id-btn')
+        let isChecked = $saveIdBtn.is(':checked')
+        localStorage.setItem('ID-SAVED', isChecked)
+
+        if (isChecked) {
+            let $userId = $('#user-id')
+            // localStorage.setItem('ID', $userId.val())
+        }
+
+        // console.log(localStorage.getItem('ID-SAVED'))
+        // console.log(localStorage.getItem('ID'))
+    }
+
     _prototype.userIdHandler = (evt) => {
         id = evt.target.value
     }
     _prototype.userPwdHandler = (evt) => {
         password = evt.target.value
+    }
+
+    _prototype.findId = () => {
+        window.location.href = 'https://knowledgetalk.co.kr:7500/';
+    }
+    
+    _prototype.findPassword = () => {
+        window.location.href = 'https://knowledgetalk.co.kr:7500/';
     }
 
     _prototype.show = () => {
@@ -66,8 +101,11 @@ const LoginController = (() => {
         }
 
         // 로그인 성공
-        window.userName = userName
         window.Logger.success('[login.js loginProcess] 로그인 성공', data.message)
+        window.userName = userName
+        if (localStorage.getItem('ID-SAVED') === 'true') {
+            localStorage.setItem('ID', id)
+        }
 
         FriendsController.requestFriends()        
     }
