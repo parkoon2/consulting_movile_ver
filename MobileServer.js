@@ -52,7 +52,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!')
 });
 
-const port = 9900
+const port = 8888
 const server = https.createServer(options, app).listen(port, () => {
   console.log('::: HTTPS ::: App Server Started - PORT : ' + port)
 })

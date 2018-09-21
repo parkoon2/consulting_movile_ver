@@ -101,6 +101,73 @@ const LoginController = (() => {
         }
 
         // 로그인 성공
+        
+        
+
+
+         // android cordova source
+    if (navigator.userAgent.match('Android') != null) {
+        
+        var getPermissions;
+        var getFCMToken = '';
+        var app = {
+            // Application Constructor
+            initialize: function() {
+                document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+            },
+
+            // deviceready Event Handler
+            //
+            // Bind any cordova events here. Common events are:
+            // 'pause', 'resume', etc.
+            onDeviceReady: function() {
+
+                //getPermissions = function () {
+                    var permissions = cordova.plugins.permissions;
+
+                    var list = [
+                        permissions.CAMERA,
+                        permissions.RECORD_AUDIO,
+                        permissions.MODIFY_AUDIO_SETTINGS
+                    ];
+                
+                    permissions.checkPermission(list, success, error);
+                
+                    function error() {
+                        console.warn('Camera or Accounts permission is not turned on');
+                    }
+                
+                    function success( status ) {
+                        if( !status.checkPermission ) {
+                        permissions.requestPermissions(list, function(status) {
+                                if( !status.checkPermission ) error();
+                            }, error());
+                        }
+                    }
+                //}
+                
+                FCMPlugin.getToken(function(token) {
+                    getFCMToken = token;
+                });
+
+                FCMPlugin.onNotification(function(data){
+                    console.log('FCMPlugin onNotification: '+JSON.stringify(data));
+                });
+            }
+        };
+
+        app.initialize();
+    }
+
+
+
+
+
+
+
+
+
+
         window.Logger.success('[login.js loginProcess] 로그인 성공', data.message)
         window.userName = userName
         if (localStorage.getItem('ID-SAVED') === 'true') {

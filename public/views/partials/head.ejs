@@ -11,9 +11,15 @@
 <!-- Script -->
 <!-- jQuery CDN -->
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/utils/adapter.js"></script>
 
 <!-- Socket IO -->
 <script src='/socket.io/socket.io.js'></script>
+<script>
+    // android cordova source
+    if (navigator.userAgent.match('Android') != null)
+        document.write('<script src="cordova/cordova.js"><\/script>');
+</script>
 <script> 
 window.socketInfo = `<%= socketUrl %>` 
 </script>

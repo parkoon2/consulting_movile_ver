@@ -57,5 +57,5 @@ $(document).ready(()=> {
     $audioToggleBtn.click(ConsultingController.toggleAudio)
     $acceptBtn.click(ConsultingController.acceptHandler)
     $rejectBtn.click(ConsultingController.rejectHandler)
-    
+
 })

@@ -120,7 +120,7 @@ const WhiteboardController = (() => {
     }
 
     _prototype.resizeCanvas = (canvas, width, height) => {
-        window.Logger.success('Canvas resizing event', `${width} : ${height}`, )
+        window.Logger.success('Canvas resizing event', `${width} : ${height}`)
         canvas.width = width
         canvas.height = height
     }
