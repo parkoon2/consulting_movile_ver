@@ -245,9 +245,9 @@ const ConsultingController = (() => {
             window.screenPeer.onaddstream = handleVideoAddStreamEvent
         
             // Set offer SDP
-            window.screenPeer.setRemoteDescription(new RTCSessionDescription(msg.sdp));
+            window.screenPeer.setRemoteDescription(new RTCSessionDescription(msg.sdp))
             
-            window.screenPeer.createAnswer(function(answerSdp) {
+            window.screenPeer.createAnswer((answerSdp) => {
                 window.screenPeer.setLocalDescription(new RTCSessionDescription(answerSdp))
                 window.Notice.messageToServer({
                     eventOp: 'ScreenShare',
@@ -281,7 +281,6 @@ const ConsultingController = (() => {
 
         window.videoPeer.onicecandidate = handleICECandidateEvent
         window.videoPeer.onaddstream = handleAddStreamEvent
-        console.log('####################################')
         try {
             navigator.getUserMedia({video: true, audio: true}, function(stream) {
                 window.Logger.success('[consulting.js startConsulting] getUserMedia 성공')
@@ -405,11 +404,11 @@ const ConsultingController = (() => {
 
     function handleVideoAddStreamEvent(event) {
         let screenVideo = document.getElementById('screen-video')
-        console.log('event.stream', event.stream)
-        if (!screenVideo.srcObject) {
-            alert('한번')
+        // if (!screenVideo.srcObject) {
+            // alert('한번')
             screenVideo.srcObject = event.stream
-        }
+            // }
+            console.log('event.stream', event.stream, screenVideo, screenVideo.srcObject)
     }
 
     function handleAddStreamEvent(event) {
